@@ -1,0 +1,14 @@
+# Виртуальные окружения
+.venv/
+venv/
+ENV/
+env/
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Ваши специфичные папки
+static/screenshots/
+
+.env

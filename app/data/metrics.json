@@ -1,0 +1,480 @@
+{
+  "categories": {
+    "H1_Visibility": "Видимость загрузки и состояний",
+    "H2_Readability": "Читаемость и понятность",
+    "H3_Navigation": "Навигация и возврат",
+    "H4_Consistency": "Консистентность",
+    "H5_Forms": "Формы и валидация",
+    "H6_Layout": "Структура и макет",
+    "H7_Accessibility": "Доступность",
+    "H8_Performance": "Производительность",
+    "H9_ErrorHandling": "Обработка ошибок",
+    "H10_Help": "Помощь и поддержка",
+    "WCAG": "WCAG соответствие"
+  },
+  "metrics": [
+    {
+      "id": "H1_M1",
+      "name": "Отсутствие индикаторов загрузки",
+      "category": "H1_Visibility",
+      "type": "boolean",
+      "weight": 0.8,
+      "config": {
+        "operation": "exists",
+        "selectors": [".spinner", ".loading", "[role=progressbar]"],
+        "text_contains": ["loading"],
+        "description": "Проверяет наличие индикаторов загрузки"
+      }
+    },
+    {
+      "id": "H1_M2",
+      "name": "Отсутствие системных уведомлений",
+      "category": "H1_Visibility",
+      "type": "boolean",
+      "weight": 0.7,
+      "config": {
+        "operation": "exists",
+        "selectors": [".toast", ".alert", "[role=status]"],
+        "description": "Проверяет наличие системных уведомлений"
+      }
+    },
+    {
+      "id": "H1_M3",
+      "name": "Обратная связь на действия",
+      "category": "H1_Visibility",
+      "type": "ratio",
+      "weight": 0.9,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "*",
+          "condition": "has_feedback"
+        },
+        "denominator": {
+          "selector": "button, input, form"
+        },
+        "description": "Процент интерактивных элементов с обратной связью"
+      }
+    },
+    {
+      "id": "H2_M1",
+      "name": "Сложность языка",
+      "category": "H2_Readability",
+      "type": "score",
+      "weight": 0.6,
+      "config": {
+        "operation": "text_analysis",
+        "target": "text",
+        "rule": "simple_language_ratio",
+        "description": "Оценка простоты языка"
+      }
+    },
+    {
+      "id": "H2_M2",
+      "name": "Доступность иконок",
+      "category": "H2_Readability",
+      "type": "ratio",
+      "weight": 0.7,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "[role=img], svg",
+          "condition": "has_label"
+        },
+        "denominator": {
+          "selector": "[role=img], svg"
+        },
+        "description": "Процент иконок с текстовыми метками"
+      }
+    },
+    {
+      "id": "H2_M3",
+      "name": "Структура заголовков",
+      "category": "H2_Readability",
+      "type": "score",
+      "weight": 0.8,
+      "config": {
+        "operation": "structure",
+        "pattern": ["h1", "h2", "p"],
+        "description": "Правильность иерархии заголовков"
+      }
+    },
+    {
+      "id": "H3_M1",
+      "name": "Подтверждение отмены",
+      "category": "H3_Navigation",
+      "type": "boolean",
+      "weight": 0.7,
+      "config": {
+        "operation": "exists",
+        "text_contains": ["undo", "revert", "отмена"],
+        "description": "Наличие возможности отменить действие"
+      }
+    },
+    {
+      "id": "H3_M2",
+      "name": "Кнопки отмены в формах",
+      "category": "H3_Navigation",
+      "type": "ratio",
+      "weight": 0.8,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "button",
+          "text_contains": ["cancel", "отмена"]
+        },
+        "denominator": {
+          "selector": "form"
+        },
+        "description": "Процент форм с кнопкой отмены"
+      }
+    },
+    {
+      "id": "H3_M3",
+      "name": "Хлебные крошки",
+      "category": "H3_Navigation",
+      "type": "boolean",
+      "weight": 0.6,
+      "config": {
+        "operation": "exists",
+        "text_contains": ["back", "home", "назад"],
+        "selectors": [".breadcrumb"],
+        "description": "Наличие хлебных крошек"
+      }
+    },
+    {
+      "id": "H4_M1",
+      "name": "Консистентность компонентов",
+      "category": "H4_Consistency",
+      "type": "score",
+      "weight": 0.7,
+      "config": {
+        "operation": "consistency",
+        "target": "components",
+        "attribute": "class",
+        "description": "Однотипность оформления компонентов"
+      }
+    },
+    {
+      "id": "H4_M2",
+      "name": "Консистентность кнопок",
+      "category": "H4_Consistency",
+      "type": "score",
+      "weight": 0.8,
+      "config": {
+        "operation": "consistency",
+        "target": "button",
+        "attribute": "class",
+        "description": "Единый стиль всех кнопок"
+      }
+    },
+    {
+      "id": "H4_M3",
+      "name": "Консистентность ссылок",
+      "category": "H4_Consistency",
+      "type": "score",
+      "weight": 0.7,
+      "config": {
+        "operation": "consistency",
+        "target": "a",
+        "attribute": ["href", "target"],
+        "description": "Единый стиль ссылок"
+      }
+    },
+    {
+      "id": "H5_M1",
+      "name": "Валидация полей",
+      "category": "H5_Forms",
+      "type": "boolean",
+      "weight": 0.9,
+      "config": {
+        "operation": "exists",
+        "selectors": ["input[required]", "input[pattern]"],
+        "description": "Наличие валидации в формах"
+      }
+    },
+    {
+      "id": "H5_M2",
+      "name": "Маркеры обязательных полей",
+      "category": "H5_Forms",
+      "type": "ratio",
+      "weight": 0.8,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "input[required]",
+          "condition": "has_marker"
+        },
+        "denominator": {
+          "selector": "input[required]"
+        },
+        "description": "Процент обязательных полей с маркерами"
+      }
+    },
+    {
+      "id": "H5_M3",
+      "name": "Модальные окна",
+      "category": "H5_Forms",
+      "type": "boolean",
+      "weight": 0.5,
+      "config": {
+        "operation": "exists",
+        "selectors": [".modal", "[role=dialog]"],
+        "description": "Использование модальных окон"
+      }
+    },
+    {
+      "id": "H6_M1",
+      "name": "Подписи полей",
+      "category": "H6_Layout",
+      "type": "ratio",
+      "weight": 0.9,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "input",
+          "condition": "has_label"
+        },
+        "denominator": {
+          "selector": "input"
+        },
+        "description": "Процент полей с подписями"
+      }
+    },
+    {
+      "id": "H6_M2",
+      "name": "Навигационное меню",
+      "category": "H6_Layout",
+      "type": "boolean",
+      "weight": 0.8,
+      "config": {
+        "operation": "exists",
+        "selector": "nav",
+        "description": "Наличие навигационного меню"
+      }
+    },
+    {
+      "id": "H6_M3",
+      "name": "Плейсхолдеры вместо подписей",
+      "category": "H6_Layout",
+      "type": "ratio",
+      "weight": -0.5,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "input",
+          "condition": "has_label"
+        },
+        "denominator": {
+          "selector": "input[placeholder]"
+        },
+        "description": "Процент полей где плейсхолдер заменяет подпись"
+      }
+    },
+    {
+      "id": "H7_M1",
+      "name": "Клавиши доступа",
+      "category": "H7_Accessibility",
+      "type": "boolean",
+      "weight": 0.6,
+      "config": {
+        "operation": "exists",
+        "attributes": ["accesskey"],
+        "description": "Наличие клавиш быстрого доступа"
+      }
+    },
+    {
+      "id": "H7_M2",
+      "name": "Автозаполнение",
+      "category": "H7_Accessibility",
+      "type": "score",
+      "weight": 0.7,
+      "config": {
+        "operation": "pattern_detection",
+        "pattern": "autofill",
+        "description": "Качество автозаполнения форм"
+      }
+    },
+    {
+      "id": "H7_M3",
+      "name": "Адаптивность",
+      "category": "H7_Accessibility",
+      "type": "boolean",
+      "weight": 0.9,
+      "config": {
+        "operation": "responsive_check",
+        "description": "Адаптивность под разные устройства"
+      }
+    },
+    {
+      "id": "H8_M1",
+      "name": "Плотность контента",
+      "category": "H8_Performance",
+      "type": "ratio",
+      "weight": 0.6,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "*"
+        },
+        "denominator": {
+          "feature": "viewport_area"
+        },
+        "description": "Плотность элементов на странице"
+      }
+    },
+    {
+      "id": "H8_M2",
+      "name": "Визуальный шум",
+      "category": "H8_Performance",
+      "type": "score",
+      "weight": 0.7,
+      "config": {
+        "operation": "noise_estimation",
+        "description": "Оценка визуального шума"
+      }
+    },
+    {
+      "id": "H8_M3",
+      "name": "Отступы и интервалы",
+      "category": "H8_Performance",
+      "type": "score",
+      "weight": 0.7,
+      "config": {
+        "operation": "spacing_analysis",
+        "description": "Качество отступов и интервалов"
+      }
+    },
+    {
+      "id": "H9_M1",
+      "name": "Сообщения об ошибках",
+      "category": "H9_ErrorHandling",
+      "type": "boolean",
+      "weight": 0.9,
+      "config": {
+        "operation": "exists",
+        "selectors": [".error", "[role=alert]"],
+        "description": "Наличие сообщений об ошибках"
+      }
+    },
+    {
+      "id": "H9_M2",
+      "name": "Понятность ошибок",
+      "category": "H9_ErrorHandling",
+      "type": "score",
+      "weight": 0.8,
+      "config": {
+        "operation": "text_analysis",
+        "rule": "clarity",
+        "description": "Понятность текста ошибок"
+      }
+    },
+    {
+      "id": "H9_M3",
+      "name": "Действия при ошибках",
+      "category": "H9_ErrorHandling",
+      "type": "boolean",
+      "weight": 0.7,
+      "config": {
+        "operation": "exists",
+        "text_contains": ["retry", "reset", "повторить"],
+        "description": "Наличие действий при ошибках"
+      }
+    },
+    {
+      "id": "H10_M1",
+      "name": "Справка и поддержка",
+      "category": "H10_Help",
+      "type": "boolean",
+      "weight": 0.6,
+      "config": {
+        "operation": "exists",
+        "text_contains": ["help", "support", "помощь"],
+        "description": "Наличие раздела помощи"
+      }
+    },
+    {
+      "id": "H10_M2",
+      "name": "Подсказки",
+      "category": "H10_Help",
+      "type": "boolean",
+      "weight": 0.7,
+      "config": {
+        "operation": "exists",
+        "selectors": [".tooltip"],
+        "description": "Наличие всплывающих подсказок"
+      }
+    },
+    {
+      "id": "H10_M3",
+      "name": "Поиск",
+      "category": "H10_Help",
+      "type": "boolean",
+      "weight": 0.8,
+      "config": {
+        "operation": "exists",
+        "selector": "input[type=search]",
+        "description": "Наличие поиска"
+      }
+    },
+    {
+      "id": "WCAG_M1",
+      "name": "Текст ссылок",
+      "category": "WCAG",
+      "type": "ratio",
+      "weight": 0.9,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "a",
+          "condition": "has_discernible_text"
+        },
+        "denominator": {
+          "selector": "a"
+        },
+        "description": "Процент ссылок с понятным текстом"
+      }
+    },
+    {
+      "id": "WCAG_M2",
+      "name": "Структурные элементы",
+      "category": "WCAG",
+      "type": "boolean",
+      "weight": 0.8,
+      "config": {
+        "operation": "exists",
+        "selectors": ["main", "header", "footer"],
+        "description": "Наличие основных структурных элементов"
+      }
+    },
+    {
+      "id": "WCAG_M3",
+      "name": "Фокус на кнопках",
+      "category": "WCAG",
+      "type": "ratio",
+      "weight": 0.8,
+      "config": {
+        "operation": "ratio",
+        "numerator": {
+          "selector": "button",
+          "condition": "is_focusable"
+        },
+        "denominator": {
+          "selector": "button"
+        },
+        "description": "Процент кнопок с правильным фокусом"
+      }
+    },
+    {
+      "id": "WCAG_M4",
+      "name": "Порядок фокуса",
+      "category": "WCAG",
+      "type": "score",
+      "weight": 0.9,
+      "config": {
+        "operation": "focus_order_check",
+        "description": "Логичность порядка фокуса"
+      }
+    }
+  ]
+}
